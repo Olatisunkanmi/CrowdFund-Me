@@ -10,6 +10,7 @@ const {
 	fetchStripeBalance,
 	fetchStripeHistory,
 	fetchAllStripeTransactions,
+	fetchStripeTransactionbyDate,
 } = StripeService;
 
 const {
@@ -141,7 +142,7 @@ class TransactionMiddleware {
 	 * @param {Next} next - Pass to the next method
 	 * @param {PaystackData} -An Object method from the paystack method
 	 * @param {StripeData} -  An Object method from the stripe method
-	 * @param (PaypalData) - An Object method from the paypal method
+	 * @param {PaypalData} - An Object method from the paypal method
 	 * @memberof TransactionMiddleware
 	 */
 	static async fetchAllTransactions(req, res, next) {
@@ -162,6 +163,19 @@ class TransactionMiddleware {
 			);
 		}
 	}
+
+	/**
+	 * Return compelete Monthly Expenditons
+	 * @static
+	 * @param {Request} req - The request from the endpoint
+	 * @param {Response} res - The response returned to the method
+	 * @param {Next} next - Pass to the next method
+	 * @param {PaystackData} -An Object method from the paystack method
+	 * @param {StripeData} -  An Object method from the stripe method
+	 * @param {PaypalData} - An Object method from the paypal method
+	 * @memberof TransactionMiddleware
+	 */
+	static async fetchTransactionbyDate() {}
 }
 
 module.exports = TransactionMiddleware;
