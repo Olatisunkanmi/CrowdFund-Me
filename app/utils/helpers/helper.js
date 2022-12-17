@@ -67,7 +67,7 @@ class Helper {
 	static errorResponse(req, res, error) {
 		console.log(error.message);
 
-		const aggregateError = { ...serverError };
+		const aggregateError = { ...error };
 		return res.status(aggregateError.status).json({
 			status: FAIL,
 			message: aggregateError.message,

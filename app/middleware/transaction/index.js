@@ -17,6 +17,7 @@ const {
 	fetchPaystackBalance,
 	fetchPaystackHistory,
 	fetchAllPaystackTransactions,
+	fetchPaystackTransactionbyDate,
 } = PaystackService;
 
 /**
@@ -62,7 +63,7 @@ class TransactionMiddleware {
 			const total_volume_USD =
 				Data[0].total_volume_by_currency[1].amount + Data[1].amount;
 
-			const total_volume_GDP = Data[2].amount;
+			const total_volume_GBP = Data[2].amount;
 
 			Data = {
 				total_transactions_stripe: StripeData,
@@ -70,7 +71,7 @@ class TransactionMiddleware {
 				total_transactions_paystack: total_transactions_paystack,
 				total_volume_NGN: total_volume_NGN,
 				total_volume_USD: total_volume_USD,
-				total_volume_GDP: total_volume_GDP,
+				total_volume_GBP: total_volume_GBP,
 			};
 			req.Balance = Data;
 			next();
@@ -175,7 +176,95 @@ class TransactionMiddleware {
 	 * @param {PaypalData} - An Object method from the paypal method
 	 * @memberof TransactionMiddleware
 	 */
-	static async fetchTransactionbyDate() {}
+	static async fetchTransactionbyDate(req, res, next) {
+		try {
+			const { from, to } = req.query;
+
+			if (from > to) {
+				return errorResponse(
+					req,
+					res,
+					new ApiError({
+						message: 'Error in date formats, Please check',
+						status: 401,
+					}),
+				);
+			}
+
+			let from_IsoString = new Date(from);
+			let to_IsoString = new Date(to);
+
+			// connvert Normal time to ISO for Paystack api
+			let gte = from_IsoString.toISOString();
+			let lte = to_IsoString.toISOString();
+
+			let PaystackData = await (
+				await fetchPaystackTransactionbyDate(gte, lte)
+			).data.data;
+
+			// connvert Normal time to EPOCH for api
+			gte = from_IsoString.getTime() / 1000;
+			lte = to_IsoString.getTime() / 1000;
+
+			let StripeData = await (
+				await fetchStripeTransactionbyDate(gte, lte)
+			).data.data;
+
+			let Data = [...PaystackData, ...StripeData];
+
+			Data = Data.map((el) => {
+				const date = new Date(
+					el.created_at || el.available_on * 1000,
+				);
+				return {
+					id: el.id,
+					currency: el.currency,
+					channel: (el.channel && 'Paystack') || 'Stripe',
+					amount: el.amount,
+					fees: el.fees || el.fee,
+					Date: date.toDateString('DD/MM/YYYY'),
+					net: el.net || el.amount - el.fees,
+				};
+			});
+
+			let net_NGN = [{ net_amount: 0 }];
+			let net_USD = [{ net_amount: 0 }];
+			let net_GBP = [{ net_amount: 0 }];
+
+			for (let i = 0; i < Data.length; i++) {
+				const el = Data[i];
+
+				if (el.currency == 'NGN') {
+					net_NGN[0].net_amount += el.net;
+
+					net_NGN.push(el);
+				}
+				if (el.currency == 'usd') {
+					net_USD[0].net_amount += el.net;
+
+					net_USD.push(el);
+				}
+				if (el.currency == 'gbp') {
+					net_GBP[0].net_amount += el.net;
+
+					net_GBP.push(el);
+				}
+			}
+
+			Data = {
+				net_NGN: net_NGN,
+				net_USD: net_USD,
+				net_GBP: net_GBP,
+			};
+
+			req.net_Balance = Data;
+			next();
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	//
 }
 
 module.exports = TransactionMiddleware;

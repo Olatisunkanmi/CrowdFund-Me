@@ -60,6 +60,20 @@ class StripeService {
 			headers: Header,
 		});
 	}
+
+	/***
+	 * it receive all transaction data from the stripe Api
+	 *@static
+	 *@Headers : Headers sent with every req.
+	 * @returns response object from Stripe api
+	 * @memberof StripeService
+	 */
+	static async fetchStripeTransactionbyDate(gte, lte) {
+		return await axios({
+			url: `${VIEW_TRANSACTIONS_ENDPOINT}?created[gte]=${gte}&created[lte]=${lte}&type=charge&limit=500`,
+			headers: Header,
+		});
+	}
 }
 
 module.exports = StripeService;

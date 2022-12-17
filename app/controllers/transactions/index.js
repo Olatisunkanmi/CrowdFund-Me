@@ -1,4 +1,5 @@
 const axios = require('axios');
+const e = require('cors');
 const { retrieveCustomersList } = require('../../services/paystack');
 const {
 	constants,
@@ -18,7 +19,7 @@ const { TRANSACTION_RESPONSE, TRANSACTION_LIST_RESPONSE, FAIL } =
  */
 class TransactionController {
 	/**
-	 * Controller from retrieve Transactions balance from all apis.
+	 * Sends All Transactions Balance
 	 * @static
 	 * @param {Request} req - The request from the endpoint
 	 * @param {Request} res - The response returned.
@@ -41,7 +42,7 @@ class TransactionController {
 	}
 
 	/**
-	 * Controller from retrieve Transactions balance from all apis.
+	 * Sends Transaction History
 	 * @static
 	 * @param {Request} req - The request from the endpoint
 	 * @param {Request} res - The response returned.
@@ -60,6 +61,30 @@ class TransactionController {
 		} catch (e) {
 			console.log(e);
 			return next(new ApiError({ message: e.message }));
+		}
+	}
+
+	/**
+	 * Sends Transactions by date selected.
+	 * @static
+	 * @param {Request} req - The request from the endpoint
+	 * @param {Request} res - The response returned.
+	 * @param {Next} next - pass handling funtions
+	 * @param {JSON} A JSON response containing Transaction totals
+	 * @memberof TransactionController
+	 */
+	static async TransactionsbyDate(req, res, next) {
+		try {
+			let Data = req.net_Balance;
+			Data = { ...Data };
+
+			successResponse(res, {
+				message: TRANSACTION_LIST_RESPONSE,
+				data: Data,
+			});
+		} catch (error) {
+			console.log(e);
+			return next(new ApiError({ message: e.message, status: 401 }));
 		}
 	}
 }

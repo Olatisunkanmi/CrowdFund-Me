@@ -24,8 +24,9 @@ class PaystackService {
 	/***
 	 * it receive transaction data from the paystack Api
 	 *@static
-	 * @memberOf PaystackService
 	 * @returns response object from paystack api
+	 * @memberof PaystackService
+	 *
 	 */
 
 	static async fetchPaystackHistory() {
@@ -38,8 +39,9 @@ class PaystackService {
 	/**
 	 * receives customer list from the paystack api
 	 * @static
-	 * @memberOf PaystackService
 	 * @returns response object from paystack api
+	 * @memberof PaystackService
+	 *
 	 */
 	static async retrieveCustomersList() {
 		return await axios({
@@ -51,8 +53,9 @@ class PaystackService {
 	/**
 	 * Receives Total Transaction balance from paystack api
 	 * @static
-	 *  @memberOf PaystackService
 	 * @returns  res object containing  transaction balance
+	 *  @memberof PaystackService
+	 *
 	 */
 	static async fetchPaystackBalance() {
 		return await axios({
@@ -64,12 +67,26 @@ class PaystackService {
 	/**
 	 * Receives All Transactions History from Paystack api
 	 * @static
-	 * @memberOf PaystackServices
 	 * @returns res object containing transaction balance
+	 * @memberof PaystackServices
+	 *
 	 */
 	static async fetchAllPaystackTransactions() {
 		return await axios({
 			url: VIEW_ALL_TRANSACTIONS_ENDPOINT,
+			headers: Header,
+		});
+	}
+	/***
+	 * it receive all transaction data from the stripe Api
+	 *@static
+	 *@Headers : Headers sent with every req.
+	 * @returns response object from Paystack api
+	 * @memberof PaystackServices
+	 */
+	static async fetchPaystackTransactionbyDate(gte, lte) {
+		return await axios({
+			url: `${VIEW_TRANSACTIONS_ENDPOINT}?perPage=500&status=success&from=${gte}&to=${lte}&limit=500`,
 			headers: Header,
 		});
 	}
