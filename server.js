@@ -42,7 +42,7 @@ class Server extends http.createServer {
 		this.app = app;
 
 		const server = http.createServer(this.app).listen(this.port);
-		server.on('listening', ChainFundItDb);
+		// server.on('listening', ChainFundItDb);
 		server.on('error', errController);
 		server.on('listening', onListening);
 	}
@@ -53,7 +53,7 @@ class Server extends http.createServer {
  */
 
 const onListening = () => {
-	console.log(`${CHAINFUNDIT_RUNNING} ${port}`);
+	logger.info(`${CHAINFUNDIT_RUNNING} ${port}`);
 };
 
 // Creating an instance of server
