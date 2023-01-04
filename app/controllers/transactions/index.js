@@ -1,5 +1,5 @@
 const axios = require('axios');
-const e = require('cors');
+const { loggers } = require('winston');
 const { retrieveCustomersList } = require('../../services/paystack');
 const {
 	constants,
@@ -35,9 +35,9 @@ class TransactionController {
 				message: TRANSACTION_RESPONSE,
 				data: Data,
 			});
-		} catch (e) {
-			console.log(e.response.data);
-			return next(new ApiError({ message: e.message }));
+		} catch (error) {
+			console.log(error.response.data);
+			return next(new ApiError({ message: error.message }));
 		}
 	}
 
@@ -73,16 +73,40 @@ class TransactionController {
 	 * @param {JSON} A JSON response containing Transaction totals
 	 * @memberof TransactionController
 	 */
-	static async TransactionsbyDate(req, res, next) {
+	static async Transactions(req, res, next) {
 		try {
-			let Data = req.net_Balance;
-			Data = { ...Data };
+			logger.warn(req.query);
+
+			const { transactions_length, Net } = req.transactions;
+
+			//1. Filter query
+			const queryObj = { ...req.query };
+			const excludedFields = [
+				'page',
+				'sort',
+				'limit',
+				'fields',
+				'start',
+				'end',
+			];
+			excludedFields.forEach((el) => delete queryObj[el]);
+
+			// filter response by query.
+			let query = transaction_list.filter((el) => {
+				return Object.keys(queryObj).every(
+					(key) => el[key] === queryObj[key],
+				);
+			});
 
 			successResponse(res, {
 				message: TRANSACTION_LIST_RESPONSE,
-				data: Data,
+				data: {
+					transactions_length: query.lengtth,
+					Net: Net || 'Undefined',
+					transaction_list: query,
+				},
 			});
-		} catch (error) {
+		} catch (e) {
 			console.log(e);
 			return next(new ApiError({ message: e.message, status: 401 }));
 		}

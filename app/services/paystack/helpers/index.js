@@ -21,21 +21,6 @@ const Header = {
 };
 
 class PaystackService {
-	/***
-	 * it receive transaction data from the paystack Api
-	 *@static
-	 * @returns response object from paystack api
-	 * @memberof PaystackService
-	 *
-	 */
-
-	static async fetchPaystackHistory() {
-		return await axios({
-			url: `${VIEW_TRANSACTIONS_ENDPOINT}?perPage=10`,
-			headers: Header,
-		});
-	}
-
 	/**
 	 * receives customer list from the paystack api
 	 * @static
@@ -74,19 +59,6 @@ class PaystackService {
 	static async fetchAllPaystackTransactions() {
 		return await axios({
 			url: VIEW_ALL_TRANSACTIONS_ENDPOINT,
-			headers: Header,
-		});
-	}
-	/***
-	 * it receive all transaction data from the stripe Api
-	 *@static
-	 *@Headers : Headers sent with every req.
-	 * @returns response object from Paystack api
-	 * @memberof PaystackServices
-	 */
-	static async fetchPaystackTransactionbyDate(gte, lte) {
-		return await axios({
-			url: `${VIEW_TRANSACTIONS_ENDPOINT}?perPage=500&status=success&from=${gte}&to=${lte}&limit=500`,
 			headers: Header,
 		});
 	}

@@ -1,8 +1,10 @@
 const express = require('express');
 const { urlencoded, json } = require('express');
 const morgan = require('morgan');
+const winston = require('winston');
 const cors = require('cors');
 const helmet = require('helmet');
+const Logger = require('./index');
 const apiV1Routes = require('../app/routes/v1');
 const { ApiError } = require('../app/utils');
 const { errController } = require('../app/utils');
@@ -13,7 +15,6 @@ const { WELCOME, v1 } = constants;
 const { notFoundApi } = genericErrors;
 
 const appConfig = async (app) => {
-	// adds security middleware to handle potential attacks from HTTP requests
 	app.use(helmet());
 	// adds middleware for cross-origin resource sharing configuration
 	app.use(cors());
@@ -21,8 +22,8 @@ const appConfig = async (app) => {
 	app.use(urlencoded({ extended: true }));
 	// adds middleware that parses requests whose content-type is application/json
 	app.use(express.json());
-	// initialize Morgan
-	app.use(morgan('common'));
+	// integrate winston logger with morgan
+	app.use(morgan('combined', { stream: logger.stream }));
 	// adds a heartbeat route for the culture
 	app.get('/', (req, res) =>
 		successResponse(res, { message: WELCOME }),
