@@ -1,7 +1,6 @@
 const winston = require('winston');
-const fs = require('fs');
 const config = require('./env');
-const { timeStamp } = require('console');
+const fs = require('fs');
 
 const { createLogger, format, transports } = winston;
 const { combine, timestamp, label, printf, json, colorize } = format;
@@ -15,7 +14,6 @@ const getLogToProcess = (fileOpt, consoleOpt) => {
 
 	logArray.push(
 		new winston.transports.File(fileOpt),
-		// new winston.transports.Http(options),
 		new winston.transports.Console(consoleOpt),
 	);
 
@@ -92,6 +90,7 @@ class Logger {
 	 *z @memberof Logger
 	 */
 	Init() {
+		if (!fs.existsSync(this.logDir)) fs.mkdirSync(this.logDir);
 		const logger = winston.createLogger({
 			format: combine(
 				timestamp(),
