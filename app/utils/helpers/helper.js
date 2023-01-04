@@ -1,11 +1,13 @@
 const constants = require('../constants');
 const genericErrors = require('../error/generic');
+const axios = require('axios');
+const rateLimit = require('express-rate-limit');
 
 const { serverError } = genericErrors;
 const { SUCCESS_RESPONSE, SUCCESS, FAIL } = constants;
 
 /**
- *  Contains Helper Methods and Functions
+ *  Contains Helper Methods and Functions for the App
  *@class Helper
  */
 
@@ -29,7 +31,7 @@ class Helper {
 	 * @param {object} options.data - The payload.
 	 * @param {string} options.message -  HTTP Status code.
 	 * @param {number} options.code -  HTTP Status code.
-	 * @memberof Helpers
+	 * @memberof Helper
 	 * @returns {JSON} - A JSON success response.
 	 */
 	static successResponse(
@@ -52,17 +54,9 @@ class Helper {
 	 * @param {number} error.status -  HTTP Status code, default is 500.
 	 * @param {string} error.message -  Error message.
 	 * @param {object|array} error.errors -  A collection of  error message.
-	 * @memberof Helpers
-	 * @returns {JSON} - A JSON failure response.
+	 * @memberof Helper
+	 * @returns {JSON} - A JSON server response.
 	 */
-	// static errorResponse(req, res, error) {
-	// 	const aggregateError = { ...serverError, ...error };
-	// 	return res.status(aggregateError.status).json({
-	// 		status: FAIL,
-	// 		message: aggregateError.message,
-	// 		errors: aggregateError.errors,
-	// 	});
-	// }
 
 	static errorResponse(req, res, error) {
 		console.log(error.message);
@@ -73,6 +67,49 @@ class Helper {
 			message: aggregateError.message,
 			errors: aggregateError.errors,
 		});
+	}
+
+	/**
+	 * Calculates the runtime of any function
+	 * @param
+	 * @memberof Helper
+	 */
+	static Performance(start, end) {
+		return logger.info(`Runtime: ${end - start} milliseconds`);
+	}
+
+	/**
+	 * Limits requests rate to  app
+	 * @param
+	 * @param {Request} req - Request object.
+	 * @param {Response} res - Response object.
+	 * @param {Next } next - passes to the next function
+	 * @memberof Helper
+	 */
+	static limitRate(req, res, next) {
+		return rateLimit({
+			windowMS: 5 * 60 * 100, //5 Minutes
+			max: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes )
+			standardHeaders: true, //Return rate limit info in the `RateLimit -*` headers
+			legacayHeaders: false, //Disable the `X-RateLimit-*` headers
+		});
+	}
+
+	/**
+	 *Checks if an object is empty
+	 * @static
+	 *@param {Object } - Object to be checked
+	 *@memberof Helper
+	 * @returns {}
+	 */
+	static checkEmptyObject(object) {
+		if (Object.keys(object).length === 0) {
+			return true;
+		} else {
+			return false;
+		}
+
+		return null;
 	}
 }
 

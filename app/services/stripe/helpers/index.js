@@ -2,7 +2,7 @@ const helper = require('../constants/index');
 const axios = require('axios').default;
 const {
 	VIEW_BALANCE_ENDPOINT,
-	VIEW_TRANSACTIONS_ENDPOINT,
+	VIEW_CHARGES_TRANSACTIONS_ENDPOINT,
 	VIEW_ALL_TRANSACTIONS_ENDPOINT,
 } = require('../constants');
 const config = require('../../../../config/env');
@@ -25,6 +25,7 @@ class StripeService {
 	 *@Headers : Headers sent with every req.
 	 * @returns response object from stripe api
 	 * @memberof StripeService
+	 * @returns {JSON} - A JSON server response.
 	 */
 	static async fetchStripeBalance() {
 		return await axios({
@@ -34,25 +35,12 @@ class StripeService {
 	}
 
 	/***
-	 * it receives transaction History data from the stripe Api
+	 *A function that generates ALL Stripe transactions
 	 *@static
 	 *@Headers : Headers sent with every req.
 	 * @returns response object from Stripe api
 	 * @memberof StripeService
-	 */
-	static async fetchStripeHistory() {
-		return await axios({
-			url: `${VIEW_TRANSACTIONS_ENDPOINT}?limit=10`,
-			headers: Header,
-		});
-	}
-
-	/***
-	 * it receive all transaction data from the stripe Api
-	 *@static
-	 *@Headers : Headers sent with every req.
-	 * @returns response object from Stripe api
-	 * @memberof StripeService
+	 * @returns {JSON} - A JSON server response.
 	 */
 	static async fetchAllStripeTransactions() {
 		return await axios({
@@ -62,15 +50,16 @@ class StripeService {
 	}
 
 	/***
-	 * it receive all transaction data from the stripe Api
+	 *A function that generates charges Stripe transactions
 	 *@static
 	 *@Headers : Headers sent with every req.
 	 * @returns response object from Stripe api
 	 * @memberof StripeService
+	 * @returns {JSON} - A JSON server response.
 	 */
-	static async fetchStripeTransactionbyDate(gte, lte) {
+	static async fetchStripeCharges() {
 		return await axios({
-			url: `${VIEW_TRANSACTIONS_ENDPOINT}?created[gte]=${gte}&created[lte]=${lte}&type=charge&limit=500`,
+			url: VIEW_CHARGES_TRANSACTIONS_ENDPOINT,
 			headers: Header,
 		});
 	}
