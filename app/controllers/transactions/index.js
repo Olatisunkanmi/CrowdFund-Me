@@ -77,7 +77,7 @@ class TransactionController {
 		try {
 			logger.warn(req.query);
 
-			const { transactions_length, Net } = req.transactions;
+			const { transaction_list, Net } = req.transactions;
 
 			//1. Filter query
 			const queryObj = { ...req.query };
