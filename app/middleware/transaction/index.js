@@ -338,7 +338,7 @@ class TransactionMiddleware {
 			let Data = [...stripeData, ...PaypalData, ...PaystackData];
 
 			Data = Data.map((el) => {
-				let cur_meta, cur_origin, cur_date, giftAid;
+				let cur_meta, cur_origin, cur_date, giftAid, giftAid_details;
 
 				//set date of transactions
 				cur_date = new Date(
@@ -351,10 +351,8 @@ class TransactionMiddleware {
 					cur_origin = el.metadata.origin;
 
 					if (el.metadata.Consent) {
-						giftAid = {
-							approved: true,
-							details: el.metadata,
-						};
+						giftAid = 'true';
+						giftAid_details = el.metadata;
 					}
 				}
 				// find transaction status
@@ -417,6 +415,7 @@ class TransactionMiddleware {
 						el.transaction_info.transaction_subject,
 					origin: cur_origin,
 					giftAid: giftAid,
+					giftAid_details: giftAid_details,
 					date: cur_date.toString('DD/MM/YYYY'),
 				};
 			});
@@ -436,6 +435,20 @@ class TransactionMiddleware {
 				new ApiError({ message: INTERNAL_SERVER_ERROR, status: 404 }),
 			);
 		}
+	}
+	/**
+	 * @static
+	 * @Route {/gift-aid-donations}
+	 * @param {Request} req - The request from the endpoint
+	 * @param {Response} res - The response returned back to the method
+	 * @param {Next} next
+	 * @param {PaystackData} - An Object response from Paystack Method
+	 * @param {StripeData} - An Object response from Paystack Method
+	 * @returns {Data} An object response containing the details
+	 * @memberof TransactionMiddleware
+	 */
+	static async findTransactionbyId(req, res, next) {
+		logger.info(req.params.id);
 	}
 }
 
