@@ -104,3 +104,4 @@ HELPER.JS
 logs/app.development.log
 *.log
 *.log
+logs/app.development.log
