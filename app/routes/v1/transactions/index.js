@@ -12,6 +12,7 @@ const { TransactionBalance, TransactionHistory, Transactions } =
 
 const {
 	fetchTransactionBalance,
+	findTransactionbyId,
 	fetchGiftAidDonations,
 	fetchTransactions,
 } = TransactionMiddleware;
@@ -21,6 +22,8 @@ router.get('/', setQuery, fetchTransactions, Transactions);
 // router.get('/dedicated-virtual-accouts' fetchDedicatedAccounts) ;
 
 router.get('/balance', fetchTransactionBalance, TransactionBalance);
+
+router.get('/:id', findTransactionbyId);
 
 router.get('/latest', setQuery, fetchGiftAidDonations, Transactions);
 
