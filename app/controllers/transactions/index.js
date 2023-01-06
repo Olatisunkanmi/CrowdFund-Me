@@ -91,6 +91,8 @@ class TransactionController {
 			];
 			excludedFields.forEach((el) => delete queryObj[el]);
 
+			logger.warn(queryObj);
+
 			// filter response by query.
 			let query = transaction_list.filter((el) => {
 				return Object.keys(queryObj).every(
