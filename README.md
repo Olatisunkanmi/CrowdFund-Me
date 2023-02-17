@@ -4,8 +4,6 @@
 <br />
 <div align="center">
 
-  <h3 align="center">Official Documentation for ChainFundit Api</h3>
-
   <p align="center">
     Visit the website
     <br />
