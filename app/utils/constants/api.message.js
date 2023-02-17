@@ -27,6 +27,9 @@ module.exports = {
 	CREATE_USER_SUCCESS: 'Created user successfully',
 	CREATE_BENEFICIARY_ERROR: 'Error creating beneficiary',
 	CREATE_BENEFICIARY_SUCCESS: 'Created beneficiary successfully',
+	CHAINAMB_CHAIN_ERROR: 'Campaign already chained by You',
+	CHAIN_SUCCESS: 'You have successfully chained this campaign',
+	USER_CHAIN_ERROR: 'Cannot chain campaign created by you',
 	USER_ALREADY_EXIST: 'USER exists already',
 	USERNAME_ALREADY_EXIST: 'USERNAME exists already',
 	USER_EXIST_VERIFICATION_FAIL: 'USER_EMAIL_EXIST_VERIFICATION_FAIL',
@@ -35,6 +38,7 @@ module.exports = {
 	USER_EMAIL_EXIST_VERIFICATION_FAIL_MSG:
 		'Login failed. It is not you, it is us.',
 	INTERNAL_SERVER_ERROR: 'Oops, something broke on the server!!!',
+	LOGIN_USER_SUCCESSFULLY: 'Login Successful',
 	INVALID_EMAIL:
 		'This email does not exist, please enter a registered email',
 	USER_NOT_FOUND: 'User not found',
