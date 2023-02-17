@@ -1,30 +1,11 @@
 const router = require('express').Router();
-const { TransactionController } = require('../../../controllers');
-const {
-	TransactionMiddleware,
-	ParamsMiddleware,
-} = require('../../../middleware');
 
-const { setQuery } = ParamsMiddleware;
+const user = require('./users');
+const admin = require('./admin');
+const campaign = require('./campaign');
 
-const { TransactionBalance, TransactionHistory, Transactions } =
-	TransactionController;
-
-const {
-	fetchTransactionBalance,
-	findTransactionbyId,
-	fetchGiftAidDonations,
-	fetchTransactions,
-} = TransactionMiddleware;
-
-router.get('/', setQuery, fetchTransactions, Transactions);
-
-// router.get('/dedicated-virtual-accouts' fetchDedicatedAccounts) ;
-
-router.get('/balance', fetchTransactionBalance, TransactionBalance);
-
-router.get('/:id', findTransactionbyId);
-
-router.get('/latest', setQuery, fetchGiftAidDonations, Transactions);
+router.use('/user', user);
+router.use('/admin', admin);
+router.use('/campaign', campaign);
 
 module.exports = router;
