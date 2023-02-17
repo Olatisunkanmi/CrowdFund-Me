@@ -42,7 +42,7 @@ class Server extends http.createServer {
 		this.app = app;
 
 		const server = http.createServer(this.app).listen(this.port);
-		// server.on('listening', ChainFundItDb);
+		server.on('listening', ChainFundItDb);
 		server.on('error', errController);
 		server.on('listening', onListening);
 	}
@@ -53,7 +53,7 @@ class Server extends http.createServer {
  */
 
 const onListening = () => {
-	logger.info(`${CHAINFUNDIT_RUNNING} ${port}`);
+	logger.warn(`${CHAINFUNDIT_RUNNING} ${port}`);
 };
 
 // Creating an instance of server
@@ -61,14 +61,14 @@ const server_one = new Server(app, port);
 
 // Node Error Handing
 process.on('unhandledRejection', (err) => {
-	console.log(`Uncaught Rejection ${err.name}, ${err.message} `);
+	logger.warn(`Uncaught Rejection ${err.name}, ${err.message} `);
 	server_one.close(() => {
 		process.exit(1);
 	});
 });
 
 process.on('uncaughtException', (err) => {
-	console.log(`Uncaught Exception ${err.name}, ${err.message} `);
+	logger.warn(`Uncaught Exception ${err.name}, ${err.message} `);
 	server_one.close(() => {
 		process.exit(1);
 	});
