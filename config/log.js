@@ -1,6 +1,7 @@
 const winston = require('winston');
-const config = require('./env');
 const fs = require('fs');
+const config = require('./env');
+const { timeStamp } = require('console');
 
 const { createLogger, format, transports } = winston;
 const { combine, timestamp, label, printf, json, colorize } = format;
@@ -90,7 +91,6 @@ class Logger {
 	 *z @memberof Logger
 	 */
 	Init() {
-		if (!fs.existsSync(this.logDir)) fs.mkdirSync(this.logDir);
 		const logger = winston.createLogger({
 			format: combine(
 				timestamp(),

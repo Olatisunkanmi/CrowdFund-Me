@@ -7,5 +7,3 @@ module.exports = {
 	appConfig,
 	config,
 };
-
-// module.exports = config;
