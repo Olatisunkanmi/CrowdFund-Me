@@ -73,14 +73,6 @@ class PaypalServices {
 			headers: { Authorization: `bearer ${access}` },
 		});
 	}
-	/**
-	 *
-	 * A function that generates Paypal gift aid  list
-	 * @static
-	 * @returns response object from Stripe api
-	 * @memberof PaypalServices
-	 * @returns {JSON} - A JSON server response.
-	 */
 }
 
 module.exports = PaypalServices;

@@ -4,20 +4,25 @@ const constants = require('../constants');
 
 const {
 	VIEW_TRANSACTIONS_ENDPOINT,
+	CHARGE_CARD,
 	VIEW_CUSTOMERS,
 	VIEW_ALL_TRANSACTIONS_ENDPOINT,
 	VIEW_TRANSACTION_TOTALS,
 } = constants;
+
 /**
  * A collection of services methods for Paystack
  * @class -  PaystackServicePaystackService
  * @Header - HTTP header to be sent with every req. to paystack api
- * @SECRET : Paystack secret key
  */
 // const SECRET = config.PAYSTACK_SECRET_KEY;
 
 const Header = {
 	Authorization: `bearer ${config.PAYSTACK_SECRET_KEY}`,
+};
+
+const test_Header = {
+	Authorization: `bearer ${config.TEST_PAYSTACK_SECRET_KEY}`,
 };
 
 class PaystackService {
@@ -60,6 +65,22 @@ class PaystackService {
 		return await axios({
 			url: VIEW_ALL_TRANSACTIONS_ENDPOINT,
 			headers: Header,
+		});
+	}
+
+	/**
+	 *Charges a card
+	 * @static
+	 * @memberof PaystackServices
+	 * @returns {Object} - reponse from paystack Api
+	 */
+	static async chargeCard(data) {
+		return await axios({
+			url: CHARGE_CARD,
+			method: 'POST',
+			headers: test_Header,
+
+			data: data,
 		});
 	}
 }
