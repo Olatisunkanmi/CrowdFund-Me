@@ -1,3 +1,3 @@
-const ChainFundItDb = require('./db');
+const ChainFundItDb = require('./setup/db');
 
 module.exports = ChainFundItDb;
