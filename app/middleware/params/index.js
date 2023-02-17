@@ -13,16 +13,6 @@ class Routeparams {
 	 * @memberof Route-Params
 	 */
 	static async setQuery(req, res, next) {
-		if (checkEmptyObject(req.query)) {
-			let start = new Date(Date.now());
-
-			let end = new Date(start);
-			end.setDate(start.getDate() - 30);
-
-			req.query = { start, end };
-
-			return next();
-		}
 		next();
 	}
 }
