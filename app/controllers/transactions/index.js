@@ -1,5 +1,3 @@
-const axios = require('axios');
-const { loggers } = require('winston');
 const { retrieveCustomersList } = require('../../services/paystack');
 const {
 	constants,
@@ -75,42 +73,19 @@ class TransactionController {
 	 */
 	static async Transactions(req, res, next) {
 		try {
-			logger.warn(req.query);
+			const { transactions_length, Net, transaction_list } =
+				req.transactions;
 
-			const { transaction_list, Net } = req.transactions;
-
-			//1. Filter query
-			const queryObj = { ...req.query };
-			const excludedFields = [
-				'page',
-				'sort',
-				'limit',
-				'fields',
-				'start',
-				'end',
-			];
-			excludedFields.forEach((el) => delete queryObj[el]);
-
-			logger.warn(queryObj);
-
-			// filter response by query.
-			let query = transaction_list.filter((el) => {
-				return Object.keys(queryObj).every(
-					(key) => el[key] === queryObj[key],
-				);
-			});
-
+			// const data = searchFilter(queryObj, transaction_list);
 			successResponse(res, {
 				message: TRANSACTION_LIST_RESPONSE,
 				data: {
-					transactions_length: query.lengtth,
-					Net: Net || 'Undefined',
+					Net: Net,
 					transaction_list: query,
 				},
 			});
 		} catch (e) {
-			console.log(e);
-			return next(new ApiError({ message: e.message, status: 401 }));
+			return next(new ApiError({ message: e.message, status: 404 }));
 		}
 	}
 }
