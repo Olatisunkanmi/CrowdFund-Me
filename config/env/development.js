@@ -1,24 +1,3 @@
 const dotenv = require('dotenv').config();
 
-module.exports = {
-	DATABASE_URL: process.env.CHAINFUNDIT_URI,
-
-	SECRET_KEY: process.env.token_Id,
-
-	SECRET_EXPIRES: process.env.token_expiresIn,
-
-	PAYSTACK_SECRET_KEY: process.env.PAYSTACK_SECRET_KEY,
-
-	TEST_PAYSTACK_SECRET_KEY: process.env.TEST_PAYSTACK_SECRET_KEY,
-
-	STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-
-	CHAINFOUNDATION_PAYPAL_SECRET_KEY:
-		process.env.CHAINFOUNDATION_PAYPAL_SECRET_KEY,
-
-	CHAINFOUNDATION_PAYPAL_CLIENT_ID:
-		process.env.CHAINFOUNDATION_PAYPAL_CLIENT_ID,
-
-	CHAINFOUNDATION_PAYPAL_ACCESS_TOKEN:
-		process.env.CHAINFOUNDATION_PAYPAL_ACCESS_TOKEN,
-};
+module.exports = {};
