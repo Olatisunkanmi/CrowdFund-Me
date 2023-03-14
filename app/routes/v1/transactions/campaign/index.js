@@ -8,10 +8,20 @@ const {
 
 const { validate } = ValidationMiddleware;
 const { authenticate } = AuthenticateMiddleware;
-const { initCardCharge } = TransactionMiddleware;
+const { initPaystackCardCharge, initStripeCharge } =
+	TransactionMiddleware;
 
-router.use(authenticate);
+// router.use(authenticate);
 
-router.post('/donate/:id', validate(validateCard), initCardCharge);
+router.post(
+	'paystack',
+	validate(validateCard),
+	initPaystackCardCharge,
+);
 
+router.post(
+	'/stripe',
+	// validate(validateCard),
+	initStripeCharge,
+);
 module.exports = router;
