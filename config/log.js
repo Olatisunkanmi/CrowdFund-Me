@@ -103,7 +103,7 @@ class Logger {
 		});
 		logger.stream = {
 			write(message) {
-				logger.info(message);
+				logger.info(`${message}++++ `);
 			},
 		};
 		return logger;
