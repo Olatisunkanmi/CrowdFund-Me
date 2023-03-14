@@ -3,8 +3,11 @@ module.exports = {
 
 	CHARGE_CARD: 'https://api.paystack.co/charge',
 
-	VIEW_ALL_TRANSACTIONS_ENDPOINT:
-		'https://api.paystack.co/transaction?perPage=500&status=success',
+	// VIEW_ALL_TRANSACTIONS_ENDPOINT:
+	// 	'https://api.paystack.co/transaction?perPage=10&status=success',
+
+	VIEW_ALL_TRANSACTIONS_ENDPOINT: (start, end) =>
+		`https://api.paystack.co/transaction?status=success&from=${start}&to=${end}&perPage=1000`,
 
 	VIEW_CUSTOMERS: 'https://api.paystack.co/customer',
 

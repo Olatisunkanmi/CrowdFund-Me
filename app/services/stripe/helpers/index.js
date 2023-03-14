@@ -1,68 +1,46 @@
-const helper = require('../constants/index');
-const axios = require('axios').default;
-const {
-	VIEW_BALANCE_ENDPOINT,
-	VIEW_CHARGES_TRANSACTIONS_ENDPOINT,
-	VIEW_ALL_TRANSACTIONS_ENDPOINT,
-} = require('../constants');
-const config = require('../../../../config/env');
+const stripe = require('stripe')(
+	'sk_test_51IcWgDHI63fHdch8RCCaF8E4bb8ER7UXTL3T2MrIuCrYXUaTOCF6bZkgN528mkq9W9B40nr4FKOuuoOOg1iJopBu000Q74vOie',
+);
+const { findCampaignById } = require('../../campaigns');
 
 /**
- * Contains Helper Methods for Stripe
- * @class Stripe Helper
- * @Header : Headers sent with every req.
- *
+ * Acollection of Helper methods for stripeServices
+ * @class
  */
 
-const Header = {
-	Authorization: `bearer ${config.STRIPE_SECRET_KEY}`,
-};
-
-class StripeService {
-	/***
-	 * it receive transaction data from the paystack Api
-	 *@static
-	 *@Headers : Headers sent with every req.
-	 * @returns response object from stripe api
-	 * @memberof StripeService
-	 * @returns {JSON} - A JSON server response.
+class stripeHelper {
+	/**
+	 * Create a payment Intent
+	 * @static
+	 * @private
+	 * @memberof stripeHelper
+	 * @returns { JSON || NULL} payment intent created
 	 */
-	static async fetchStripeBalance() {
-		return await axios({
-			url: VIEW_BALANCE_ENDPOINT,
-			headers: Header,
+	static async createPayment(options) {
+		return await stripe.paymentIntents.create({
+			amount: options.amount,
+			currency: options.currency,
+			automatic_payment_methods: options.autoPayment,
+			metadata: {
+				campaign_title: options.title,
+				desc: options.desc,
+				created_by: options.createdBy,
+			},
 		});
 	}
 
-	/***
-	 *A function that generates ALL Stripe transactions
-	 *@static
-	 *@Headers : Headers sent with every req.
-	 * @returns response object from Stripe api
-	 * @memberof StripeService
-	 * @returns {JSON} - A JSON server response.
+	/**
+	 * verify a payment
+	 * @static
+	 * @memberof stripeHelper
+	 * @return {JSON || NULL }
 	 */
-	static async fetchAllStripeTransactions() {
-		return await axios({
-			url: VIEW_ALL_TRANSACTIONS_ENDPOINT,
-			headers: Header,
-		});
-	}
-
-	/***
-	 *A function that generates charges Stripe transactions
-	 *@static
-	 *@Headers : Headers sent with every req.
-	 * @returns response object from Stripe api
-	 * @memberof StripeService
-	 * @returns {JSON} - A JSON server response.
-	 */
-	static async fetchStripeCharges() {
-		return await axios({
-			url: VIEW_CHARGES_TRANSACTIONS_ENDPOINT,
-			headers: Header,
+	static async verifyPayment(options) {
+		return stripe.paymentIntents.confirm(options.id, {
+			return_url: 'https://localhost:8000/api/v1/webhook/stripe',
+			payment_method: 'pm_card_visa',
 		});
 	}
 }
 
-module.exports = StripeService;
+module.exports = stripeHelper;
