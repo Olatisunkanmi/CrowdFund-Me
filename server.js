@@ -7,9 +7,9 @@ const dotenv = require('dotenv');
 const { ChainFundItDb } = require('./app/db');
 dotenv.config();
 
-const { CHAINFUNDIT_RUNNING } = constants;
+logger.warn(process.env.NODE_ENV);
 
-// console.log(ChainFundItDb);
+const { CROWDFUNDME_RUNNING } = constants;
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -53,7 +53,7 @@ class Server extends http.createServer {
  */
 
 const onListening = () => {
-	logger.warn(`${CHAINFUNDIT_RUNNING} ${port}`);
+	logger.info(`${CROWDFUNDME_RUNNING} ${port}`);
 };
 
 // Creating an instance of server
@@ -61,14 +61,14 @@ const server_one = new Server(app, port);
 
 // Node Error Handing
 process.on('unhandledRejection', (err) => {
-	logger.warn(`Uncaught Rejection ${err.name}, ${err.message} `);
+	logger.error(`Uncaught Rejection ${err.name}, ${err.message} `);
 	server_one.close(() => {
 		process.exit(1);
 	});
 });
 
 process.on('uncaughtException', (err) => {
-	logger.warn(`Uncaught Exception ${err.name}, ${err.message} `);
+	logger.error(`Uncaught Exception ${err.name}, ${err.message} `);
 	server_one.close(() => {
 		process.exit(1);
 	});
