@@ -7,7 +7,7 @@ const {
 	genericErrors,
 } = require('../../utils');
 
-const { successResponse, errorResponse } = Helper;
+const { successResponse, errorResponse, fnPerformance } = Helper;
 const { TRANSACTION_RESPONSE, TRANSACTION_LIST_RESPONSE, FAIL } =
 	constants;
 
@@ -73,19 +73,16 @@ class TransactionController {
 	 */
 	static async Transactions(req, res, next) {
 		try {
-			const { transactions_length, Net, transaction_list } =
-				req.transactions;
+			const data = req.transactions;
 
-			// const data = searchFilter(queryObj, transaction_list);
+			fnPerformance(req.reqTime, Helper.curTime());
+
 			successResponse(res, {
 				message: TRANSACTION_LIST_RESPONSE,
-				data: {
-					Net: Net,
-					transaction_list: query,
-				},
+				data: data,
 			});
 		} catch (e) {
-			return next(new ApiError({ message: e.message, status: 404 }));
+			throw e;
 		}
 	}
 }
