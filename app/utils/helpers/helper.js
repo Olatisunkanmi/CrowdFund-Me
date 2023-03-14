@@ -5,7 +5,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const { faker } = require('@faker-js/faker');
+const crypto = require('crypto');
+const config = require('../../../config/env');
 
+const { PAYSTACK_HASH, PAYSTACK_SECRET_KEY } = config;
 const { serverError } = genericErrors;
 const { SUCCESS_RESPONSE, SUCCESS, FAIL } = constants;
 
@@ -85,8 +88,8 @@ class Helper {
 	 * @param
 	 * @memberof Helper
 	 */
-	static Performance(start, end) {
-		return logger.warn(`Runtime: ${end - start} milliseconds`);
+	static fnPerformance(start, end) {
+		logger.warn(`Runtime: ${end - start} milliseconds`);
 	}
 
 	/**
@@ -265,14 +268,103 @@ class Helper {
 	}
 
 	/**
-	 * Generates a unique ref for every trnsaction
+	 *  converts a JavaScript object or value into a JSON string
+	 * @static
+	 * @param { Object } obj - object to be converted to JSON string
+	 * @memberof Helper
+	 * @returns {JSON}
 	 */
+	static stringifyObject(obj) {
+		return JSON.stringify(obj);
+	}
 
 	/**
-	 * Converts stringy a JSON object
+	 * Convert normal time to EPOCH
 	 * @static
+	 * @param { String } start - start Date string from when data should be fetched
+	 * @param { String } end -End date
+	 * @memberof Helper
+	 * @returns {JSON}
+	 */
+	static convertDateToEpoch(start, end) {
+		const start_EPO = Math.round(start / 1000);
+		const end_EPO = Math.round(end / 1000);
+
+		return { start_EPO, end_EPO };
+	}
+
+	/**
+	 *convert Normal time to ISO
+	 * @static
+	 * @param { String } start -  Date string from when data should be fetched
+	 * @param { String }end -End date
+	 * @memberof Helper
+	 * @returns {JSON}
+	 */
+	static convertDateToIso(start, end) {
+		const start_ISO = new Date(start * 1000).toISOString();
+
+		const end_ISO = new Date(end * 1000).toISOString();
+		return { start_ISO, end_ISO };
+	}
+
+	/**
+	 * Set date if date is missing in query
+	 * @static
+	 * @param { String } from -  Date string from when data should be fetched
+	 * @param { String } to -End date
+	 * @memberof Helper
+	 * @returns {JSON}
+	 */
+	static setDate() {
+		const from = new Date(Date.now());
+		const to = new Date(from);
+
+		to.setDate(from.getDate() - 30);
+
+		return { from, to };
+	}
+
+	/**
+	 * Generates log for api errors.
+	 * @static
+	 * @private
+	 * @param {object} error - The API error object.
+	 * @param {Request} req - Request object.
+	 * @memberof Helpers
+	 * @returns {String} - It returns null.
+	 */
+	static apiErrLogMessager(error, req) {
+		logger.error(
+			`${error.name} - ${error.status} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`,
+		);
+	}
+
+	/**
+	 * Verify and sanitize request body
+	 * @private
+	 * @param { Object } - request body to verify
+	 * @static
+	 * @memberof Helper
 	 * @
 	 */
+	static verifyRequest(options) {
+		const { campaign_title, desc, created_by, campaign_origin } =
+			options;
+	}
+
+	/**
+	 * Generates a secure hash of the request body using the SHA-512 algorithm
+	 * @private
+	 * @param
+	 * @memberof Helper
+	 * @returns { String }
+	 */
+	static generateHash(options) {
+		return crypto
+			.createHmac('sha512', PAYSTACK_SECRET_KEY)
+			.digest('hex');
+	}
 }
 
 module.exports = Helper;

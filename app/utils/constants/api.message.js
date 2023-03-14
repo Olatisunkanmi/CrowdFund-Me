@@ -1,5 +1,5 @@
 module.exports = {
-	CHAINFUNDIT_RUNNING: 'CHAINFUNDIT is running on PORT',
+	CROWDFUNDME_RUNNING: 'CROWDFUNDME is running on PORT',
 	SUCCESS: 'success',
 
 	TRANSACTION_RESPONSE: 'Balance Retrieved',
@@ -9,7 +9,7 @@ module.exports = {
 	EMAIL_CONFLICT: 'A user with your email already exists',
 	THIRD_PARTY_ERROR: 'Error From Third Party Api',
 	WELCOME:
-		'Welcome to CHAINFUNDIT. The new, fun, and rewarding way to crowdfund!  ',
+		'Welcome to CROWDFUNDME. The new, fun, and rewarding way to crowdfund!  ',
 	INVALID_CREDENTIALS: 'Incorrect login details',
 	INVALID_PERMISSION:
 		'Permission denied. Invalid credentials provided',
