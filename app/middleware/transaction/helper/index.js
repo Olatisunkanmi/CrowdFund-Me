@@ -8,13 +8,10 @@ class TransactionHelper {
 	 * @static
 	 * @param
 	 * @memberof TransactionHelper
+	 * @returns { Array } Data - An array of new formed object from the third parties api
 	 */
 	static createNewObj(arr) {
 		const Data = TransactionHelper.createTransactionList(arr);
-
-		// const newData = {
-		// 	transaction_list: Data,
-		// };
 
 		return Data;
 	}
@@ -26,7 +23,7 @@ class TransactionHelper {
 	 * @param {*} net_USD - Object containing total, net amount & platform net
 	 * @param {*} net_GBP - Object containing total, net amount & platform net
 	 * @memberof TransactionHelper
-	 * @returns
+	 * @returns { Array } Data - an array of newly formed objects
 	 */
 	static createTransactionList(arr) {
 		return arr.map((el) => {
@@ -45,7 +42,10 @@ class TransactionHelper {
 			cur_status = TransactionHelper.setTransactionStatus(cur_status);
 
 			//set transaction status
-			const transaction_amount = el.amount;
+			const transaction_amount = el.amount / 100;
+
+			//set network fee
+			const network_fee = TransactionHelper.calcNetworkFee(el);
 
 			//calculate 5% of each transaction
 			const cur_percent = TransactionHelper.calcCurPercent(
@@ -55,7 +55,7 @@ class TransactionHelper {
 			// platform fee =(  5% - network fee )
 			let platform_fee = TransactionHelper.calcPlatformFee(
 				cur_percent,
-				el,
+				network_fee,
 			);
 
 			// calc the net_amount of each transaction - after 5%
@@ -70,26 +70,12 @@ class TransactionHelper {
 			cur_currency =
 				TransactionHelper.setTransactionsCurrency(cur_currency);
 
-			// TransactionHelper.findCurrencyNet(
-			// 	cur_currency,
-			// 	cur_status,
-			// 	net_NGN,
-			// 	transaction_amount,
-			// 	cur_net,
-			// 	platform_fee,
-			// 	net_USD,
-			// 	net_GBP,
-			// );
-
 			return {
 				id: el.id || el.transaction_info.transaction_id,
 				status: cur_status,
 				transaction_amount: transaction_amount,
 				currency: cur_currency,
-				network_fee:
-					el.fee ||
-					el.fees / 100 ||
-					el.transaction_info.fee_amount.value * -1,
+				network_fee: network_fee,
 				platform_fee: platform_fee,
 				net_amount: cur_net,
 				paid_at: cur_date,
@@ -101,6 +87,14 @@ class TransactionHelper {
 				//  ||el.transaction_info.transaction_subject,
 			};
 		});
+	}
+
+	static calcNetworkFee(el) {
+		return (
+			el.fee / 100 ||
+			el.fees / 100 ||
+			el.transaction_info.fee_amount.value * -1
+		);
 	}
 
 	/**
@@ -143,16 +137,16 @@ class TransactionHelper {
 	/**
 	 * calculate platform fee for each transaction
 	 * @param {String} cur_percent current percent
-	 * @param {String} el - current element in the loop
+	 * @param {String} amount - current amount in the loop
 	 * @memberof TransactionHelper
 	 * @returns { String} platform fee
 	 */
-	static calcPlatformFee(cur_percent, el) {
-		let platform_fee =
-			(cur_percent - el.fees) / 100 || cur_percent - el.fee;
+	static calcPlatformFee(cur_percent, network_fee) {
+		let platform_fee = cur_percent - network_fee;
 
 		//If Platform is less than 0, means network fee > 5%
 		platform_fee < 0 ? (platform_fee = 0) : platform_fee;
+
 		return platform_fee;
 	}
 
@@ -221,22 +215,25 @@ class TransactionHelper {
 			if (el.currency == 'NGN') {
 				net_NGN.total_amount += el.transaction_amount;
 				net_NGN.net_amount += el.net_amount;
+				net_NGN.net_network += el.network_fee;
 				net_NGN.net_platform += el.platform_fee;
 			}
 
 			if (el.currency == 'USD') {
 				net_USD.total_amount += el.transaction_amount;
 				net_USD.net_amount += el.net_amount;
+				net_USD.net_network += el.network_fee;
 				net_USD.net_platform += el.platform_fee;
 			}
 			if (el.currency == 'GBP') {
 				net_GBP.total_amount += el.transaction_amount;
 				net_GBP.net_amount += el.net_amount;
+				net_GBP.net_network += el.network_fee;
 				net_GBP.net_platform += el.platform_fee;
 			}
 		});
 
-		return { net_NGN, net_USD, net_GBP };
+		return { net_NGN, net_USD, net_GBP, transaction_list };
 	}
 
 	/**
@@ -250,16 +247,19 @@ class TransactionHelper {
 		let net_NGN = {
 			total_amount: 0,
 			net_amount: 0,
+			net_network: 0,
 			net_platform: 0,
 		};
 		let net_USD = {
 			total_amount: 0,
 			net_amount: 0,
+			net_network: 0,
 			net_platform: 0,
 		};
 		let net_GBP = {
 			total_amount: 0,
 			net_amount: 0,
+			net_network: 0,
 			net_platform: 0,
 		};
 		return { net_NGN, net_USD, net_GBP };
@@ -275,22 +275,25 @@ class TransactionHelper {
 	 */
 	static async fetchApiData(paystack, stripe) {
 		try {
-			const data = await Promise.all([paystack(), stripe()]).then(
+			const data = await Promise.all([paystack, stripe]).then(
 				(values) => {
 					return [...values[0].data.data, ...values[1].data.data];
 				},
 			);
 
 			return TransactionHelper.createNewObj(data);
-			// const transaction_lenght = data.length;
-			// return data;
-			// return { transaction_list, transaction_lenght };
 		} catch (e) {
 			throw e;
 		}
-
-		// return TransactionHelper.createNewObj(data);
 	}
+
+	/**
+	 * It create a  payment Intent on stripe api
+	 * @static
+	 * @param { Object } items - amount
+	 * @memberof TransactionHelper
+	 */
+	static async createStripePaymentIntent(options) {}
 }
 
 module.exports = TransactionHelper;

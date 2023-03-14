@@ -1,3 +1,7 @@
+const stripe = require('stripe')(
+	'sk_test_51IcWgDHI63fHdch8RCCaF8E4bb8ER7UXTL3T2MrIuCrYXUaTOCF6bZkgN528mkq9W9B40nr4FKOuuoOOg1iJopBu000Q74vOie',
+);
+
 const TransactionHelper = require('./helper');
 const {
 	PaystackService,
@@ -16,6 +20,7 @@ const {
 	fetchStripeBalance,
 	fetchAllStripeTransactions,
 	fetchStripeCharges,
+	createPaymentIntent,
 } = StripeService;
 
 const {
@@ -39,28 +44,26 @@ class TransactionMiddleware {
 	 * @param {Response} res - The response returned to the method
 	 * @param {Next} next - Pass to the next method
 	 * @memberof TransactionMiddleware
+	 * @returns
 	 */
 
 	static async fetchTransactions(req, res, next) {
+		const { start, end } = req.query;
+
 		try {
-			const start = curTime();
+			const startTime = curTime();
 			const data = await fetchApiData(
-				fetchAllPaystackTransactions,
-				fetchAllStripeTransactions,
+				fetchAllPaystackTransactions(start.iso_time, end.iso_time),
+				fetchAllStripeTransactions(start.epoch_time, end.epoch_time),
 			);
 
-			const end = curTime();
-
-			Helper.Performance(start, end);
-
-			// req.transactions = { transaction_list, transaction_lenght };
-			logger.debug(data.length);
-
 			req.transactions = data;
+			req.reqTime = startTime;
+
 			next();
 		} catch (e) {
-			logger.debug(e.message);
-			console.info(e.response.data);
+			logger.error(e.message);
+			console.log(e.response.data);
 		}
 	}
 
@@ -299,39 +302,15 @@ class TransactionMiddleware {
 	}
 
 	/**
-	 * Transaction Middlleware for initializing card transafer (charge card)
-	 *	@static
-	 * @param {Request} req - The request from the endpoint.
-	 * @param {Response} res - The response returned by the method.
-	 * @param {Next} next
-	 * @memberof TransactionMiddleware
-	 * @returns { JSON } A JSON response containing the details of the contact us added
-	 */
-	static async initCardCharge(req, res, next) {
-		try {
-			const resp = await chargeCard(req.body);
-			logger.warn(resp.data.data);
-		} catch (e) {
-			console.log(e.response.data);
-			errorResponse(req, res, {
-				status: 404,
-				message: e.message,
-			});
-		}
-	}
-
-	static filterByDateRange(transactions, startDate, endDate) {
-		return transactions.filter((transaction) => {
-			const paidAtDate = new Date(transaction.paid_at);
-			return paidAtDate >= startDate && paidAtDate <= endDate;
-		});
-	}
-
-	/**
+	 * Calculate the net amount for all denomination
 	 * @static
+	 * @param {Object} req - The request from the endpoint
+	 * @param {Object} res - the response returned by the method
+	 * @param {next} next - passes to next function
+	 * @memberof TransactionMiddleware
+	 * @returns {Array} - Array containing all transaction including net amounts
 	 */
 	static calculateTransactionNet(req, res, next) {
-		// const { transaction_list, transaction_lenght } = req.transactions;
 		const data = req.transactions;
 
 		let { net_NGN, net_USD, net_GBP } =
@@ -344,50 +323,54 @@ class TransactionMiddleware {
 			net_GBP,
 		);
 
-		console.log(Net);
-
-		res.status(200).json({
-			Net: Net,
-			data: data,
-		});
+		req.transactions = Net;
+		next();
 	}
 
 	/**
-	 * @static
+	 * Transaction Middlleware for initializing card transafer (charge card) on paystack Api
+	 *	@static
+	 * @param {Request} req - The request from the endpoint.
+	 * @param {Response} res - The response returned by the method.
+	 * @param {Next} next
+	 * @memberof TransactionMiddleware
+	 * @returns { JSON } A JSON response containing the details of the contact us added
 	 */
-	static QueryTransactions(req, res, next) {
-		const data = req.transactions;
+	static async initPaystackCardCharge(req, res, next) {
+		try {
+			const resp = await chargeCard(req.body);
+			logger.warn(resp.data.data);
+		} catch (e) {
+			errorResponse(req, res, {
+				status: 404,
+				message: e.message,
+			});
+		}
+	}
 
-		logger.warn(req.query);
+	/**
+	 * Transaction Middleware to initialize charge on stripe Api
+	 * @static
+	 * @param {Request} req - The request from the endpoint.
+	 * @param {Response} res - The response returned by the method.
+	 * @param {Next} next
+	 * @memberof TransactionMiddleware
+	 * @returns { JSON } A JSON response containing the details of the contact us added
+	 */
+	static async initStripeCharge(req, res, next) {
+		try {
+			const { charges } = await createPaymentIntent(req.body);
 
-		//1. Filter query
-		const queryObj = { ...req.query };
-		const excludedFields = [
-			'page',
-			'sort',
-			'limit',
-			'fields',
-			'start',
-			'end',
-		];
-		excludedFields.forEach((el) => delete queryObj[el]);
-
-		// console.log(queryObj);
-
-		let query = data.filter((el) => {
-			return Object.keys(queryObj).every(
-				(key) => el[key] === queryObj[key],
-			);
-		});
-
-		// let query = TransactionMiddleware.filterByDateRange(
-		// 	data,
-		// 	start,
-		// 	end,
-		// );
-
-		req.transactions = query;
-		next();
+			res.send({
+				charge: charges,
+			});
+		} catch (e) {
+			Helper.apiErrLogMessager(e);
+			errorResponse(req, res, {
+				status: 404,
+				message: e.message,
+			});
+		}
 	}
 }
 
