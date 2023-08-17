@@ -19,8 +19,8 @@ class AuthController {
 	 */
 	static signIn(req, res) {
 		const { user } = req;
-		const data = Helper.addTokenToData(user);
 
+		const data = Helper.addTokenToData(user);
 		Helper.successResponse(res, {
 			data: data,
 			message: LOGIN_USER_SUCCESSFULLY,

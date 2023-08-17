@@ -14,6 +14,8 @@ class WebhookController {
 			res.sendStatus(200);
 			next();
 		} catch (e) {
+			logger.info('Webhook Response Error');
+			Helper.apiErrLogMessager(e);
 			errorResponse(req, res, {
 				status: 404,
 				message: e.message,

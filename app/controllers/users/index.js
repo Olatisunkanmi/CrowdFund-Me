@@ -1,9 +1,19 @@
-const { UserModel } = require('../../model');
-const { Helper, constants, ApiError } = require('../../utils');
+// const { UserModel } = require('../../model');
+const { UserModel } = require('../../SQL models');
+const {
+	Helper,
+	constants,
+	ApiError,
+	DBError,
+} = require('../../utils');
 
 const { successResponse, errorResponse } = Helper;
-
-const { SUCCESS_RESPONSE } = constants;
+const {
+	SUCCESS_RESPONSE,
+	CREATE_USER_ERROR,
+	CREATE_USER_SUCCESS,
+	ERROR_FETCHING_USER,
+} = constants;
 
 /**
  * A collection of controller methods for users
@@ -24,23 +34,51 @@ class UserController {
 
 	static async createUser(req, res, next) {
 		try {
-			let newUser = await new UserModel({
+			const user = await new UserModel({
 				...req.body,
 			});
-
-			newUser = await newUser.save();
-
-			successResponse(res, {
-				data: newUser,
-				message: SUCCESS_RESPONSE,
-				code: 201,
+			const data = await user.save();
+			return successResponse(res, {
+				message: CREATE_USER_SUCCESS,
+				data: data,
 			});
 		} catch (e) {
-			logger.warn(e.message);
+			const dbError = new DBError({
+				status: CREATE_USER_ERROR,
+				message: e.message,
+			});
+			Helper.moduleErrLogMessager(dbError);
+			return next(new ApiError({ message: CREATE_USER_ERROR }));
+		}
+	}
+
+	/**
+	 * Fetches all user
+	 * @static
+	 * @param {Request} req - The request from the endpoint
+	 * @param {Response} res - The response returned.
+	 * @param {Next} next -calls the next handler
+	 * @memberof UserController
+	 * @returns {JSON || NULL} - A JSON response object of all users or NULL
+	 */
+
+	static async fetchUser(req, res, next) {
+		try {
+			const data = req.user;
+
+			return successResponse(res, {
+				message: SUCCESS_RESPONSE,
+				data: data,
+			});
+		} catch (error) {
+			Helper.moduleErrLogMessager(error);
 			errorResponse(
 				req,
 				res,
-				new ApiError({ status: 401, message: e.message }),
+				new ApiError({
+					status: 404,
+					message: ERROR_FETCHING_USER,
+				}),
 			);
 		}
 	}

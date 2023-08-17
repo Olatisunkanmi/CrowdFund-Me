@@ -79,7 +79,11 @@ class TransactionController {
 
 			successResponse(res, {
 				message: TRANSACTION_LIST_RESPONSE,
-				data: data,
+
+				data: {
+					donation_count: data.transaction_list.length,
+					data: data,
+				},
 			});
 		} catch (e) {
 			throw e;
