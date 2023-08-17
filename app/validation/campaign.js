@@ -1,18 +1,18 @@
-const Joi = require('joi');
-const { ValidationHelper } = require('../utils');
+const Joi = require("joi");
+const { ValidationHelper, constants } = require("../utils");
 
-const { validateString, validateNumber, validateEnums } =
-	ValidationHelper;
+const { CAMPAIGN_CATEGORIES } = constants;
+
+const { validateString, validateNumber, validateEnums } = ValidationHelper;
 
 const validateCampaign = Joi.object({
-	title: validateString('Campaign Title', Joi),
-	desc: validateString('Campaign Description', Joi),
-	createdBy: validateString("Campaign creator's name ", Joi),
-	type: validateEnums(['private', 'public'], 'Campaign Type', Joi),
-	location: validateString('Campaign location', Joi),
-	target: validateNumber('Campaign Target', Joi),
-	currency: validateString('Campaigns currency', Joi),
-	commission: validateNumber('Campaign commission', Joi),
+  title: validateString("Campaign Title", Joi),
+  desc: validateString("Campaign Description", Joi),
+  type: validateEnums(["private", "public"], "Campaign Type", Joi),
+  location: validateString("Campaign location", Joi),
+  target: validateNumber("Campaign Target", Joi),
+  category: validateEnums(CAMPAIGN_CATEGORIES, "Campaign Category", Joi),
+  currency: validateString("Campaigns currency", Joi),
 });
 
 module.exports = validateCampaign;

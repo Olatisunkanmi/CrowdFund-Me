@@ -1,18 +1,15 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const { UserController, AuthController } = require("../../../controllers");
 const {
-	UserController,
-	AuthController,
-} = require('../../../controllers');
+  validateUserSchema,
+  validateUserSignIn,
+} = require("../../../validation");
 const {
-	validateUserSchema,
-	validateUserSignIn,
-} = require('../../../validation');
-const {
-	ValidationMiddleware,
-	AuthenticateMiddleware,
-	AuthMiddleware,
-	UserMiddleware,
-} = require('../../../middleware');
+  ValidationMiddleware,
+  AuthenticateMiddleware,
+  AuthMiddleware,
+  UserMiddleware,
+} = require("../../../middleware");
 
 const { validateLoginEmail } = AuthMiddleware;
 const { signIn } = AuthController;
@@ -22,18 +19,18 @@ const { createUser } = UserController;
 const { validate } = ValidationMiddleware;
 
 router.post(
-	'/signup',
-	validate(validateUserSchema),
-	validateUserEmail,
-	createUser,
+  "/signup",
+  validate(validateUserSchema),
+  validateUserEmail,
+  // createUser,
 );
 
 router.post(
-	'/signin',
-	validate(validateUserSignIn),
-	validateLoginEmail,
-	comparePassword,
-	signIn,
+  "/signin",
+  validate(validateUserSignIn),
+  validateLoginEmail,
+  comparePassword,
+  signIn,
 );
 
 module.exports = router;

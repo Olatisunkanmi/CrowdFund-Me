@@ -26,26 +26,25 @@ class WebhookMiddleware {
     const campaignCreatorEmail = data.customer.email;
 
     try {
-
       let Options = {
-      	subject: event,
-      	amount : Helper.convertFigureToKobo(data.amount),
-      	payment_processor : 'Paystack',
-      	payment_processor_fee : Helper.convertFigureToKobo(data.fees),
-      	channel : data.channel,
-      	status: data.gateway_response,
-      	currency: data.currency,
-      	paid_at: data.paid_at,
-      	channel: data.channel,
-      	donor_details: {
-      		name: data.authorization.sender_name,
-      		sender_bank: data.authorization.sender_bank,
-      		sender_country: data.authorization.sender_country,
-      	},
-      	campaign_details: {
-      		details: `${data.customer.first_name} ${data.customer.last_name}`,
-      		email: data.customer.email,
-      	},
+        subject: event,
+        amount: Helper.convertFigureToKobo(data.amount),
+        payment_processor: "Paystack",
+        payment_processor_fee: Helper.convertFigureToKobo(data.fees),
+        channel: data.channel,
+        status: data.gateway_response,
+        currency: data.currency,
+        paid_at: data.paid_at,
+        channel: data.channel,
+        donor_details: {
+          name: data.authorization.sender_name,
+          sender_bank: data.authorization.sender_bank,
+          sender_country: data.authorization.sender_country,
+        },
+        campaign_details: {
+          details: `${data.customer.first_name} ${data.customer.last_name}`,
+          email: data.customer.email,
+        },
       };
 
       const mail = await WebhookHelper.compileTemplate(Options);
@@ -57,11 +56,10 @@ class WebhookMiddleware {
       errorResponse(
         req,
         res,
-        new ApiError({ status: 404, message: e.message })
+        new ApiError({ status: 404, message: e.message }),
       );
     }
   }
-
 
   /**
    * @static
@@ -120,7 +118,7 @@ class WebhookMiddleware {
         errorResponse(
           req,
           res,
-          new ApiError({ status: 403, message: INVALID_PERMISSION })
+          new ApiError({ status: 403, message: INVALID_PERMISSION }),
         );
       }
     } catch (e) {
@@ -129,7 +127,7 @@ class WebhookMiddleware {
       errorResponse(
         req,
         res,
-        new ApiError({ status: 404, message: "Webhook Error" })
+        new ApiError({ status: 404, message: "Webhook Error" }),
       );
     }
   }

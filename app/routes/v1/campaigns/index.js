@@ -1,46 +1,64 @@
-const router = require('express').Router();
-const { validateCampaign } = require('../../../validation');
-const { CampaignController } = require('../../../controllers');
+const router = require("express").Router();
+const { validateCampaign } = require("../../../validation");
+const { CampaignController } = require("../../../controllers");
 const {
-	CampaignMiddleware,
-	ValidationMiddleware,
-	AuthenticateMiddleware,
-} = require('../../../middleware');
+  CampaignMiddleware,
+  ValidationMiddleware,
+  AuthenticateMiddleware,
+  UserMiddleware,
+} = require("../../../middleware");
 
 const {
-	refrenceUser,
-	findCampaignById,
-	verifyUser,
-	verifyChainAmbEligibity,
+  refrenceUser,
+  findCampaignById,
+  verifyUser,
+  verifyChainAmbEligibity,
+  validateCampaignTitle,
+  fetchCampaignsByUserId,
+  fetchAllCampaigns,
+  deleteCampaign,
+  restrictCreator,
+  attachCampaignQueries,
+  verifyCampaignStatus,
+  isChainEnabled,
+  createChainCampaignOptions,
 } = CampaignMiddleware;
-
-const { createCampaign, chainCampaign, fetchCampaigns } =
-	CampaignController;
+const { fetchUserById } = UserMiddleware;
+const { createCampaign, chainCampaign, fetchCampaigns } = CampaignController;
 
 const { authenticate } = AuthenticateMiddleware;
 const { validate } = ValidationMiddleware;
 
+router.get("/", fetchAllCampaigns, fetchCampaigns);
+
+// router.get('/user/:id', fetchUserById, fetchCampaignsByUserId, fetchCampaigns)');
+router.get("/:id", findCampaignById, fetchCampaigns);
+
 router.use(authenticate);
-
-router.get('/', fetchCampaigns);
-
 router.post(
-	'/start',
-	validate(validateCampaign),
-	refrenceUser,
-	createCampaign,
+  "/start",
+  validate(validateCampaign),
+  validateCampaignTitle,
+  refrenceUser,
+  attachCampaignQueries,
+  createCampaign,
 );
 
-// router.get('/:id',  )
+router.get("/user-campaigns", fetchCampaignsByUserId, fetchCampaigns);
 
-router.post(
-	'/chain/:id',
-	findCampaignById,
-	verifyUser,
-	verifyChainAmbEligibity,
-	chainCampaign,
+router.delete(
+  "/:id",
+  findCampaignById,
+  verifyUser,
+  deleteCampaign,
+  fetchCampaigns,
 );
 
-// router.patch('/:id')
+// router.put(
+// 	'deactivate/:id',
+// 	findCampaignById,
+// 	verifyUser,
+// 	deactivateCampaign,
+// );
 
 module.exports = router;

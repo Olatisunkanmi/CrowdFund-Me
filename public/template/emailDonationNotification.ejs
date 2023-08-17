@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Confirmation</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #104901;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #104901;
+      font-size: 20px;
+      margin-top: 0;
+    }
+    h3 {
+      color: #104901;
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ChainFundit Notification</h1>
+    <h2>Donation Notification</h2>
+    
+    <p>Event: <%= subject %></p>
+    <p>Amount: <%= amount %> <%= currency %></p>
+    <p>Payment Processor: <%= payment_processor %></p>
+    <p>Payment Processor Fee: <%= payment_processor_fee %> <%= currency %></p>
+    <p>Channel: <%= channel %></p>
+    <p>Status: <%= status %></p>
+    <p>Paid At: <%= paid_at %></p>
+    
+    <h3>Donor Details</h3>
+    <p>Name: <%= donor_details.name %></p>
+    <p>Sender Bank: <%= donor_details.sender_bank %></p>
+    <p>Sender Country: <%= donor_details.sender_country %></p>
+    
+    <h3>Campaign Details</h3>
+    <p>Details: <%= campaign_details.details %></p>
+    <p>Email: <%= campaign_details.email %></p>
+  </div>
+</body>
+</html>

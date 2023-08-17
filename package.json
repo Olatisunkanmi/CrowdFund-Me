@@ -1,39 +1,43 @@
 {
-	"name": "chainfundit-api",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"start": "node server.js",
-		"dev": "NODE_ENV=development nodemon --trace-warnings server.js"
-	},
-	"keywords": [],
-	"author": "Olasunkanmi Igbasan",
-	"license": "ISC",
-	"dependencies": {
-		"app-root-path": "^3.1.0",
-		"axios": "^1.2.2",
-		"bcrypt": "^5.1.0",
-		"cors": "^2.8.5",
-		"debug": "^4.3.4",
-		"dotenv": "^16.0.3",
-		"ejs": "^3.1.9",
-		"express": "^4.18.2",
-		"express-rate-limit": "^6.7.0",
-		"helmet": "^6.0.1",
-		"joi": "^17.7.0",
-		"jsonwebtoken": "^9.0.0",
-		"mongoose": "^6.9.0",
-		"morgan": "^1.10.0",
-		"mysql2": "^3.2.0",
-		"nodemailer": "^6.9.1",
-		"nodemon": "^3.0.1",
-		"sequelize": "^6.30.0",
-		"stripe": "^11.12.0",
-		"uuid": "^9.0.0",
-		"winston": "^3.8.2"
-	},
-	"devDependencies": {
-		"@faker-js/faker": "^7.6.0"
-	}
+  "name": "crowdfund_me-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon --trace-warnings server.js",
+    "format:check": "npx prettier --check .",
+    "format:write": "npx prettier --write ."
+  },
+  "keywords": [],
+  "author": "Olasunkanmi Igbasan",
+  "license": "ISC",
+  "dependencies": {
+    "app-root-path": "^3.1.0",
+    "axios": "^1.2.2",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^6.0.1",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.5.1",
+    "mongoose": "^6.9.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.2.0",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^3.0.1",
+    "stripe": "^13.1.0",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.2"
+  }
 }

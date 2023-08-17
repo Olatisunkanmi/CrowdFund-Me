@@ -1,3 +1,3 @@
-const PaypalServices = require('./helpers');
+const PaypalServices = require("./helpers");
 
 module.exports = PaypalServices;

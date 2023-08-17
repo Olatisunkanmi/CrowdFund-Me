@@ -1,4 +1,4 @@
 module.exports = {
-	ChainCampaignController: require('./chainCampaigns'),
-	CampaignController: require('./campaigns'),
+  ChainCampaignController: require("./chainCampaigns"),
+  CampaignController: require("./campaigns"),
 };

@@ -1,32 +1,31 @@
-const router = require('express').Router();
-const { TransactionController } = require('../../../../controllers');
+const router = require("express").Router();
+const { TransactionController } = require("../../../../controllers");
 const {
-	TransactionMiddleware,
-	CampaignMiddleware,
-	ParamsMiddleware,
-	AuthenticateMiddleware,
-	ValidationMiddleware,
-} = require('../../../../middleware');
-const { validateCard } = require('../../../../validation');
-
+  TransactionMiddleware,
+  CampaignMiddleware,
+  ParamsMiddleware,
+  AuthenticateMiddleware,
+  ValidationMiddleware,
+} = require("../../../../middleware");
+const { validateCard } = require("../../../../validation");
 const { authenticate } = AuthenticateMiddleware;
 const { validate } = ValidationMiddleware;
-const { setQuery, QueryRoute } = ParamsMiddleware;
+const { setQuery, QueryRoute, writeToFile } = ParamsMiddleware;
 const { findCampaignById } = CampaignMiddleware;
 
 const { TransactionBalance, TransactionHistory, Transactions } =
-	TransactionController;
+  TransactionController;
 
-const { fetchTransactions, calculateTransactionNet } =
-	TransactionMiddleware;
+const { fetchTransactions, calculateTransactionNet } = TransactionMiddleware;
 
 router.get(
-	'/',
-	setQuery,
-	fetchTransactions,
-	// QueryRoute,
-	calculateTransactionNet,
-	Transactions,
+  "/",
+  setQuery,
+  fetchTransactions,
+  // QueryRoute,
+  calculateTransactionNet,
+  writeToFile,
+  Transactions,
 );
 
 // router.get('/dedicated-virtual-accouts' ,fetchDedicatedAccounts) ;

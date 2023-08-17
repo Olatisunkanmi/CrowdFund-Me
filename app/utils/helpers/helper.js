@@ -13,8 +13,8 @@ const { serverError } = genericErrors;
 const { SUCCESS_RESPONSE, SUCCESS, FAIL } = constants;
 
 /**
- *  Contains Helper Methods and Functions for the App
- *@class Helper
+ * Contains Helper Methods and Functions for the App
+ * @class Helper
  */
 
 class Helper {
@@ -65,14 +65,14 @@ class Helper {
 	 */
 
 	static errorResponse(req, res, error) {
-		const aggregateError = { ...error };
+		const aggregateError = { ...serverError, ...error };
+		Helper.apiErrLogMessager(aggregateError, req);
 		return res.status(aggregateError.status).json({
 			status: FAIL,
 			message: aggregateError.message,
 			errors: aggregateError.errors,
 		});
 	}
-
 	/**
 	 *Get the   current date in millisecond
 	 * @private
@@ -84,8 +84,18 @@ class Helper {
 	}
 
 	/**
+	 * Returns the time a function begins or end
+	 * @param
+	 * @memberof Helper
+	 */
+	static runTime() {
+		return Date.now();
+	}
+
+	/**
 	 * Calculates the runtime of any function
 	 * @param
+	 * @returns
 	 * @memberof Helper
 	 */
 	static fnPerformance(start, end) {
@@ -132,6 +142,10 @@ class Helper {
 	 * @returns { Json || Null } - returns JSON || Null if otherwise
 	 */
 	static checkEmptyArray(arr) {
+		if (!arr) {
+			return null;
+		}
+
 		if (arr.length === 0) {
 			return null;
 		}
@@ -211,17 +225,17 @@ class Helper {
 	 * @returns { Object } - The user object with an attached token
 	 */
 	static addTokenToData(user) {
-		const { _id, first_name, last_name, email } = user;
+		const { id, first_name, last_name, email } = user;
 
 		const token = Helper.generateToken({
-			_id,
+			id,
 			first_name,
 			last_name,
 			email,
 		});
 
 		return {
-			_id,
+			id,
 			first_name,
 			last_name,
 			email,
@@ -236,7 +250,7 @@ class Helper {
 	 * @returns { string } ID - generated ID
 	 */
 	static generateID() {
-		return faker.database.mongodbObjectId();
+		return uuidv4();
 	}
 
 	/**
@@ -317,12 +331,36 @@ class Helper {
 	 * @returns {JSON}
 	 */
 	static setDate() {
-		const from = new Date(Date.now());
+		const from = Helper.getDate();
 		const to = new Date(from);
 
 		to.setDate(from.getDate() - 30);
 
 		return { from, to };
+	}
+
+	/**
+	 * Get current date
+	 * @static
+	 * @memberof Helper
+	 * @returns {Date}
+	 */
+
+	static getDate() {
+		return new Date(Date.now());
+	}
+
+	/**
+	 * Generates log for module errors.
+	 * @static
+	 * @param {object} error - The module error object.
+	 * @memberof Helpers
+	 * @returns { Null } -  It returns null.
+	 */
+	static moduleErrLogMessager(error) {
+		return logger.error(
+			`${error.status} - ${error.name} - ${error.message}`,
+		);
 	}
 
 	/**
@@ -336,7 +374,7 @@ class Helper {
 	 */
 	static apiErrLogMessager(error, req) {
 		logger.error(
-			`${error.name} - ${error.status} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`,
+			`${error.name} - ${error.status} - ${error.message} - ${req.url} - ${req.method} - ${req.ip}`,
 		);
 	}
 
@@ -361,9 +399,17 @@ class Helper {
 	 * @returns { String }
 	 */
 	static generateHash(options) {
+		logger.info(options)
 		return crypto
 			.createHmac('sha512', PAYSTACK_SECRET_KEY)
-			.digest('hex');
+			.update(JSON.stringify(options)).digest('hex');
+	}
+
+	static convertFigureToKobo(figure) {
+		return new Intl.NumberFormat('en-NG', {
+			style: 'currency',
+			currency: 'NGN',
+		}).format(figure);
 	}
 }
 

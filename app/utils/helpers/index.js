@@ -1,7 +1,7 @@
-const Helper = require('./helper');
-const ValidationHelper = require('./validations');
+const Helper = require("./helper");
+const ValidationHelper = require("./validations");
 
 module.exports = {
-	Helper,
-	ValidationHelper,
+  Helper,
+  ValidationHelper,
 };

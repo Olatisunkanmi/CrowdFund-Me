@@ -4,7 +4,6 @@ const fs = require("fs");
 const config = require("../../../../config/env");
 const { Helper } = require("../../../utils");
 
-
 const {
   EMAIL_TEST_ID,
   EMAIL_TEST_PSW,
@@ -54,16 +53,16 @@ class WebhookHelper {
    * @memberof WebhookHelper
    */
   static async createTransport() {
-      return nodemailer.createTransport({
-        service: EMAIL_SERVICE,
-        host: EMAIL_HOST,
-        port: 465,
-        // secure: true,
-        auth: {
-          user: EMAIL_TEST_ID,
-          pass: EMAIL_TEST_PSW,
-        },
-      });
+    return nodemailer.createTransport({
+      service: EMAIL_SERVICE,
+      host: EMAIL_HOST,
+      port: 465,
+      // secure: true,
+      auth: {
+        user: EMAIL_TEST_ID,
+        pass: EMAIL_TEST_PSW,
+      },
+    });
   }
 
   /**
@@ -89,7 +88,10 @@ class WebhookHelper {
   static async sendMail(data, campaignCreatorEmail) {
     try {
       const transporter = await WebhookHelper.createTransport();
-      const Options = await WebhookHelper.createOptions(data, campaignCreatorEmail);
+      const Options = await WebhookHelper.createOptions(
+        data,
+        campaignCreatorEmail,
+      );
 
       return await WebhookHelper.transportMail(transporter, Options);
     } catch (e) {

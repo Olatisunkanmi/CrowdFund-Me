@@ -1,3 +1,3 @@
-const apiMessage = require('./api.message');
+const apiMessage = require("./api.message");
 
 module.exports = apiMessage;

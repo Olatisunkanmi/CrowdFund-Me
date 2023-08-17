@@ -1,0 +1,5 @@
+ALTER TABLE users MODIFY COLUMN id VARCHAR(255) NOT NULL PRIMARY KEY;
+
+`CREATE TABLE chained_campaigns (id INT NOT NULL PRIMARY KEY, campaign_id INT NOT NULL, creator_id INT NOT NULL, ambassador_id INT NOT NULL, title VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, currency VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, status VARCHAR(255) NOT NULL, target INT NOT NULL, amount INT NOT NULL, chain_raised INT NOT NULL, location VARCHAR(255) NOT NULL, commission INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL);
+
+`, 

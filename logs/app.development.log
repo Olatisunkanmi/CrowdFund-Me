@@ -1,0 +1,148 @@
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T17:20:37.915Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T17:20:37.927Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: NO)","timestamp":"2023-08-17T17:20:38.072Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T17:20:54.466Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T17:20:54.476Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: NO)","timestamp":"2023-08-17T17:20:54.530Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T17:47:37.076Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T17:47:37.088Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: NO)","timestamp":"2023-08-17T17:47:37.133Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T17:47:43.898Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T17:47:43.911Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: NO)","timestamp":"2023-08-17T17:47:43.950Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T17:47:47.360Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T17:47:47.373Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: NO)","timestamp":"2023-08-17T17:47:47.427Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T18:18:00.760Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T18:18:00.774Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T18:18:00.842Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T18:18:10.477Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T18:18:10.489Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: getaddrinfo ENOTFOUND Olasunkanmi1localhost","timestamp":"2023-08-17T18:18:13.955Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T18:18:26.168Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T18:18:26.181Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: getaddrinfo ENOTFOUND Olasunkanmi1localhost","timestamp":"2023-08-17T18:18:29.704Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T18:20:44.591Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T18:20:44.603Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T18:20:44.665Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:21:27.552Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:21:27.565Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:21:27.625Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:21:31.901Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:21:31.914Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:21:31.977Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:24:21.449Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:24:21.463Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:24:21.538Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:24:39 +0000] \"GET /api/v1/ HTTP/1.1\" 200 116 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:24:39.432Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"404 - ApiError - Oops, You have reached a dead end","timestamp":"2023-08-17T19:28:27.833Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:28:27 +0000] \"GET /api/v1//auth/register HTTP/1.1\" 500 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:28:27.838Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"404 - ApiError - Oops, You have reached a dead end","timestamp":"2023-08-17T19:29:15.503Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:29:15 +0000] \"GET /api/v1//auth/signup HTTP/1.1\" 500 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:29:15.506Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"404 - ApiError - Oops, You have reached a dead end","timestamp":"2023-08-17T19:29:17.266Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:29:17 +0000] \"GET /api/v1//auth/signup HTTP/1.1\" 500 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:29:17.270Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - First name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:29:20.705Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - First name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:29:20.708Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:29:20 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:29:20.711Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - First name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:29:36.325Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - First name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:29:36.326Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:29:36 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:29:36.329Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - First name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:29:36.355Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - First name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:29:36.356Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:29:36 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:29:36.359Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - Last name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:30:12.446Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - Last name is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:30:12.447Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:30:12 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 59 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:30:12.450Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"400 - SyntaxError - Unexpected string in JSON at position 36","timestamp":"2023-08-17T19:30:25.513Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - Email is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:30:30.637Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - Email is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:30:30.638Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:30:30 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 55 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:30:30.642Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - First name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:31:56.338Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - First name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:31:56.339Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:31:56 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 76 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:31:56.341Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - User type is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:32:00.734Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - User type is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:32:00.735Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:32:00 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 59 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:32:00.737Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - First name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:32:01.872Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - First name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:32:01.872Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:32:01 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 76 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:32:01.874Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - User type is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:32:03.566Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - User type is a required field - /signup - POST - ::1","timestamp":"2023-08-17T19:32:03.567Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:32:03 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 59 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:32:03.569Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - Please enter a valid User type - /signup - POST - ::1","timestamp":"2023-08-17T19:39:41.058Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - Please enter a valid User type - /signup - POST - ::1","timestamp":"2023-08-17T19:39:41.058Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:39:41 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:39:41.060Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:41:01 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" - - \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:41:01.490Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:42:39 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" - - \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:42:39.109Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:43:36.512Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:43:36.524Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:43:36.603Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:45:40.866Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:45:40.877Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:45:40.940Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:45:56.710Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:45:56.736Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:45:56.805Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:46:02.621Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:46:02.633Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:46:02.692Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:46:33 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" - - \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:46:33.749Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:46:46.926Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:46:46.939Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:46:47.002Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - Last name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:46:47.467Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - Last name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:46:47.469Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:46:47 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 75 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:46:47.480Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"404 - ApiError - Oops, You have reached a dead end","timestamp":"2023-08-17T19:46:49.860Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:46:49 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 500 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:46:49.864Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"404 - ApiError - Oops, You have reached a dead end","timestamp":"2023-08-17T19:46:51.611Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:46:51 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 500 60 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:46:51.614Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:46:58.269Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:46:58.281Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:46:58.344Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:47:08.549Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:47:08.562Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:47:08.626Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:47:22.963Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:47:22.974Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:47:23.028Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ValidationError - undefined - First name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:47:23.781Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"ApiError - 401 - First name can not be lesser than 5 characters - /signup - POST - ::1","timestamp":"2023-08-17T19:47:23.784Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:47:23 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" 401 76 \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:47:23.799Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"::1 - - [17/Aug/2023:19:47:29 +0000] \"POST /api/v1//auth/signup HTTP/1.1\" - - \"-\" \"PostmanRuntime/7.32.3\"\n++++ ","timestamp":"2023-08-17T19:47:29.485Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:48:29.581Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:48:29.602Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:48:29.676Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T19:49:11.831Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T19:49:11.848Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T19:49:11.907Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:02:03.882Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:02:03.899Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:02:03.962Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:04:15.844Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:04:15.856Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:04:15.910Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:05:08.629Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:05:08.651Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:05:08.716Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:05:34.569Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:05:34.583Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:05:34.623Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:07:19.696Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:07:19.708Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:07:19.753Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:08:59.344Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:08:59.363Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:08:59.426Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:09:26.434Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:09:26.450Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:09:26.485Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:09:46.622Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:09:46.635Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:09:46.677Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:10:11.293Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:10:11.316Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:10:11.352Z"}
+{"label":"CHAINFUNDIT API","level":"warn","message":"development","timestamp":"2023-08-17T20:10:20.595Z"}
+{"label":"CHAINFUNDIT API","level":"info","message":"CHAINFUNDIT is running on PORT 3000","timestamp":"2023-08-17T20:10:20.607Z"}
+{"label":"CHAINFUNDIT API","level":"error","message":"DB Error: Error: Access denied for user 'root'@'172.17.0.1' (using password: YES)","timestamp":"2023-08-17T20:10:20.647Z"}

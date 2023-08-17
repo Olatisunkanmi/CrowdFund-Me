@@ -1,8 +1,8 @@
-const { appConfig, Logger } = require('./config');
+const { appConfig, Logger } = require("./config");
 
-global.logger = Logger.createLogger({ label: 'CROWDFUND ME' });
+global.logger = Logger.createLogger({ label: "CHAINFUNDIT API" });
 
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
