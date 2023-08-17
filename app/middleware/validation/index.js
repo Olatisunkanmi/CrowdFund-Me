@@ -22,8 +22,12 @@ class ValidationMiddleware {
 				await validateInput(schema, req.body);
 				next();
 			} catch (e) {
-				logger.warn(e);
-				next(new ApiError({ message: e.message }));
+				Helper.apiErrLogMessager(e, req);
+				errorResponse(
+					req,
+					res,
+					new ApiError({ status: 401, message: e.message }),
+				);
 			}
 		};
 	}

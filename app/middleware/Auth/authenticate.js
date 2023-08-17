@@ -1,6 +1,6 @@
 const { loggers } = require('winston');
-const { Helper, constants } = require('../../utils');
-
+const { Helper, constants, ApiError } = require('../../utils');
+const { UserService } = require('../../services');
 const { errorResponse } = Helper;
 const { INVALID_CREDENTIALS, AUTH_REQUIRED } = constants;
 /**
@@ -32,9 +32,9 @@ class AuthenticateMiddleware {
 					message: INVALID_CREDENTIALS,
 				}),
 			);
+		} else {
+			next();
 		}
-
-		next();
 	}
 
 	/**
@@ -74,6 +74,17 @@ class AuthenticateMiddleware {
 	}
 
 	/**
+	 * Verify's an active token with the DB if user exists
+	 * @static
+	 * @param { Object } user - the user object
+	 * @memberof AuthenticateMiddleware
+	 * @returns { Object || Null } - Returns user if present or Null otherwise
+	 */
+	static async verifyUser(user) {
+		return await UserService.findUserByEmail(user.email);
+	}
+
+	/**
 	 * Verify's a user's token or presence or it
 	 * @static
 	 * @param { Object } req - the request object
@@ -82,7 +93,7 @@ class AuthenticateMiddleware {
 	 * @memberof AuthenticateMiddleware
 	 * @returns { JSON || Null } - Returns error response if verification fails or Null if otherwise
 	 */
-	static authenticate(req, res, next) {
+	static async authenticate(req, res, next) {
 		const bearerToken = AuthenticateMiddleware.checkToken(req);
 
 		if (!bearerToken) {
@@ -90,13 +101,28 @@ class AuthenticateMiddleware {
 				status: 403,
 				message: AUTH_REQUIRED,
 			});
-		} else {
+		}
+
+		if (bearerToken) {
 			try {
 				const decodedToken = Helper.verifyToken(bearerToken);
 
 				req.user = decodedToken.payload;
-				next();
+
+				const authUser = await AuthenticateMiddleware.verifyUser(
+					req.user,
+				);
+
+				const data = Helper.checkEmptyArray(authUser);
+
+				data
+					? next()
+					: errorResponse(req, res, {
+							status: 403,
+							message: INVALID_CREDENTIALS,
+					  });
 			} catch (e) {
+				Helper.moduleErrLogMessager(e);
 				errorResponse(req, res, {
 					status: 403,
 					message: INVALID_CREDENTIALS,

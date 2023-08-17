@@ -1,5 +1,7 @@
-const { loggers } = require('winston');
 const { Helper, ApiError } = require('../../utils');
+const fs = require('fs');
+const config = require('../../../config/env');
+// console.log(config.rootPath);
 
 const {
 	checkEmptyObject,
@@ -10,13 +12,13 @@ const {
 } = Helper;
 /**
  *  A Middleware function for route params
- * @class - Route Params
+ * @class routeParams
  */
-class Routeparams {
+class routeParams {
 	/**
 	 * Set default params
 	 * @static
-	 * @memberof Route-Params
+	 * @memberof routeParams
 	 */
 	static async setQuery(req, res, next) {
 		const { from, to } = req.query;
@@ -99,6 +101,50 @@ class Routeparams {
 		req.transactions = query;
 		next();
 	}
+
+	static writeToFile(req, res, next) {
+		const data = req.transactions;
+		const trans = data.transaction_list;
+		const tme = Helper.curTime();
+		// Extract headers from first object in array
+		const headers = Object.keys(data.transaction_list[0]);
+		// console.log(headers);
+
+		//convert data to csv
+		// Convert data to array of arrays
+		// const dataArray = trans.map((obj) =>
+		// 	headers.map((key) => obj[key]),
+		// );
+
+		const dataArray = trans.map(function (obj) {
+			return headers.map(function (key) {
+				return obj[key];
+			});
+		});
+
+		// Insert headers as first row of data
+		dataArray.unshift(headers);
+
+		// Convert data to CSV format
+		const csvData = dataArray.map((row) => row.join(',')).join('\n');
+
+		// console.log(csvData);
+
+		//write to file
+		// Write CSV data to file
+		// fs.writeFile(
+		// 	`${config.rootPath}/logs/All Donations.csv`,
+		// 	csvData,
+		// 	(err) => {
+		// 		if (err) throw err;
+		// 		console.log('Data written to file');
+		// 	},
+		// );
+		logger.error('Data written to file');
+		const xTme = Helper.curTime();
+		Helper.fnPerformance(tme, xTme);
+		next();
+	}
 }
 
-module.exports = Routeparams;
+module.exports = routeParams;

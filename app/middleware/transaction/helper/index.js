@@ -217,6 +217,7 @@ class TransactionHelper {
 				net_NGN.net_amount += el.net_amount;
 				net_NGN.net_network += el.network_fee;
 				net_NGN.net_platform += el.platform_fee;
+				net_NGN.donation_count += 1;
 			}
 
 			if (el.currency == 'USD') {
@@ -224,12 +225,14 @@ class TransactionHelper {
 				net_USD.net_amount += el.net_amount;
 				net_USD.net_network += el.network_fee;
 				net_USD.net_platform += el.platform_fee;
+				net_USD.donation_count += 1;
 			}
 			if (el.currency == 'GBP') {
 				net_GBP.total_amount += el.transaction_amount;
 				net_GBP.net_amount += el.net_amount;
 				net_GBP.net_network += el.network_fee;
 				net_GBP.net_platform += el.platform_fee;
+				net_GBP.donation_count += 1;
 			}
 		});
 
@@ -249,18 +252,21 @@ class TransactionHelper {
 			net_amount: 0,
 			net_network: 0,
 			net_platform: 0,
+			donation_count: 0,
 		};
 		let net_USD = {
 			total_amount: 0,
 			net_amount: 0,
 			net_network: 0,
 			net_platform: 0,
+			donation_count: 0,
 		};
 		let net_GBP = {
 			total_amount: 0,
 			net_amount: 0,
 			net_network: 0,
 			net_platform: 0,
+			donation_count: 0,
 		};
 		return { net_NGN, net_USD, net_GBP };
 	}

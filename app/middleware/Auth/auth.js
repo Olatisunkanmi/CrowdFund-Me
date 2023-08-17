@@ -1,11 +1,15 @@
 const { Helper, constants, ApiError } = require('../../utils');
 const { UserModel } = require('../../model');
 const { UserService } = require('../../services');
-const { INVALID_EMAIL } = require('../../utils/constants');
 
 const { findUserByEmail } = UserService;
 const { errorResponse } = Helper;
-const { USER_NOT_FOUND } = constants;
+const {
+	USER_NOT_FOUND,
+	INTERNAL_SERVER_ERROR,
+	INVALID_EMAIL,
+	INVALID_CREDENTIALS,
+} = constants;
 
 /**
  * A collection for middleware methods for user
@@ -27,19 +31,24 @@ class AuthMiddleware {
 			const [data] = await findUserByEmail(req.body.email);
 			const user = Helper.checkEmptyArray(data);
 
-			req.user = data;
+			req.user = user;
+
 			return req.user
 				? next()
 				: errorResponse(
 						req,
 						res,
-						new ApiError({ status: 404, message: USER_NOT_FOUND }),
+						new ApiError({
+							status: 404,
+							message: INVALID_CREDENTIALS,
+						}),
 				  );
 		} catch (e) {
+			Helper.apiErrLogMessager(e, req);
 			errorResponse(
 				req,
 				res,
-				new ApiError({ status: 404, message: e.message }),
+				new ApiError({ status: 404, message: INTERNAL_SERVER_ERROR }),
 			);
 		}
 	}

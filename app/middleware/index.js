@@ -6,6 +6,7 @@ const AuthMiddleware = require('./Auth/auth');
 const AuthenticateMiddleware = require('./Auth/authenticate');
 const CampaignMiddleware = require('./campaign');
 const WebhookMiddleware = require('./webhooks');
+const chainCampaignMiddleware = require('./chainCampaign');
 
 module.exports = {
 	TransactionMiddleware,
@@ -16,4 +17,5 @@ module.exports = {
 	AuthMiddleware,
 	CampaignMiddleware,
 	WebhookMiddleware,
+	chainCampaignMiddleware,
 };

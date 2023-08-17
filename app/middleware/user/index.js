@@ -1,13 +1,12 @@
 const { Helper, ApiError, constants } = require('../../utils');
 const { UserModel } = require('../../model');
+const db = require('../../sql');
+
 const { UserService } = require('../../services');
-const { findUserByEmail } = UserService;
+const { findUserByEmail, findUserById, fetchUsers } = UserService;
 const { errorResponse } = Helper;
-const {
-	EMAIL_CONFLICT,
-	INTERNAL_SERVER_ERROR,
-	RESOURCE_EXISTS_VERIFICATION_FAIL,
-} = constants;
+const { EMAIL_CONFLICT, USER_NOT_FOUND, INVALID_CREDENTIALS } =
+	constants;
 
 /**
  * A collection for middleware methods for user
@@ -27,7 +26,6 @@ class UserMiddleware {
 		try {
 			const data = await findUserByEmail(req.body.email);
 			const user = Helper.checkEmptyArray(data);
-
 			return user
 				? errorResponse(
 						req,
@@ -36,6 +34,53 @@ class UserMiddleware {
 				  )
 				: next();
 		} catch (e) {
+			next(new ApiError({ message: e.message }));
+		}
+	}
+
+	/**
+	 *Fetche user by Id
+	 * @static
+	 * @param { Object } req - The request from the endpoint
+	 * @param { Object } res - The response returned by the method.
+	 * @param { Object } next - calls the next handle
+	 * @memberof UserMiddleware
+	 * @returns {JSON || Null } - Returns error response if validation fails or Null if otherwise.
+	 */
+	static async fetchUserById(req, res, next) {
+		const { id } = req.params;
+
+		const data = await findUserById(id);
+		const user = Helper.checkEmptyArray(data);
+
+		req.user = user;
+
+		user
+			? next()
+			: errorResponse(
+					req,
+					res,
+					new ApiError({
+						status: 404,
+						message: USER_NOT_FOUND,
+					}),
+			  );
+	}
+
+	static async fetchAllUsers(req, res, next) {
+		try {
+			const data = await fetchUsers();
+			req.user = data;
+
+			req.users
+				? next()
+				: errorResponse(
+						req,
+						res,
+						new ApiError({ status: 404, message: USER_NOT_FOUND }),
+				  );
+		} catch (e) {
+			Helper.moduleErrLogMessager(e);
 			next(new ApiError({ message: e.message }));
 		}
 	}

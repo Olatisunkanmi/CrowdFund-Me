@@ -51,7 +51,7 @@ class TransactionMiddleware {
 		const { start, end } = req.query;
 
 		try {
-			const startTime = curTime();
+			const startTime = Helper.curTime();
 			const data = await fetchApiData(
 				fetchAllPaystackTransactions(start.iso_time, end.iso_time),
 				fetchAllStripeTransactions(start.epoch_time, end.epoch_time),
@@ -62,7 +62,7 @@ class TransactionMiddleware {
 
 			next();
 		} catch (e) {
-			logger.error(e.message);
+			Helper.moduleErrLogMessager(e);
 			console.log(e.response.data);
 		}
 	}
