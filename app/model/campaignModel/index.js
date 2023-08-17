@@ -9,11 +9,13 @@ const { errorResponse } = Helper;
 
 class CampaignModel {
 	constructor(options) {
-		this._id = options._id || Helper.generateID();
-		this.tittle = options.title;
+		// this._id = options._id || Helper.generateID();
+		this.title = options.title;
 		this.desc = options.desc;
 		this.target = options.target;
 		this.createdBy = options.createdBy;
+		this.category = options.category;
+		this.status = 'Live';
 		this.creatorId = options.userID;
 		this.currency = options.currency;
 		this.commission = options.commission;

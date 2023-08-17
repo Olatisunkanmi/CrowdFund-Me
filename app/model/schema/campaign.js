@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const campaignSchema = new Schema({
-	_id: String,
-	title: String,
+	id: mongoose.Schema.Types.ObjectId,
+	title: {
+		type: String,
+		unique: true,
+	},
 	desc: String,
 	target: Number,
 	raised: Number,
@@ -12,6 +15,7 @@ const campaignSchema = new Schema({
 	type: String,
 	creatorId: String,
 	currency: String,
+	category: String,
 	status: String,
 	campaign_type: String,
 	commission: Number,
