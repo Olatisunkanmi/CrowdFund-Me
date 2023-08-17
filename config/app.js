@@ -34,7 +34,7 @@ const appConfig = async (app) => {
 
 	// catches 404 errors and forwards them to error handlers
 	app.all('*', (req, res, next) => {
-		next(new ApiError({ message: 'Not Found', status: 404 }));
+		next(notFoundApi);
 	});
 
 	// handles all forwarded errors

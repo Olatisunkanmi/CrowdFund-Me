@@ -1,6 +1,8 @@
 const dotenv = require('dotenv').config();
 
 module.exports = {
+	REMOTE_DB_URL: process.env.REMOTE_SQL_URL,
+
 	DATABASE_URL: process.env.CHAINFUNDIT_URI,
 
 	SECRET_KEY: process.env.token_Id,
